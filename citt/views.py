@@ -41,19 +41,21 @@ def registro_view(request):
     ruts = Alumno.objects.all()
     date = timezone.now
     if request.method == 'POST':
-        rutAlumno = request.POST.get('txtrut',True)
+        rutAlumno = request.POST.get('txtrut',True).upper()
         #httpsÑ--portal.sidiv.registrocivil.cl-docstatus_RUN¿20057170'3/type¿CEDULA/serial¿108608430/mrz¿108608430298112232111223
        
 
         #Todo este metodo del rut es solo para scanners en ingles
-        if rutAlumno[0].lower() == 'h':
-          nuevoRut = rutAlumno.split('¿')[1].replace('/type','').replace("'","-")
-          
+        if rutAlumno[0].lower() == 'H':
+            elrut = rutAlumno.split('¿')[1].replace('/type','').replace("'","-")
+            if elrut.find('-') == 7:
+                 nuevoRut = elrut[:-1]
+            else:
+                nuevoRut = elrut
         else:
            nuevoRut = rutAlumno.replace("'","-")
         
-        if nuevoRut.find('-') == 7:
-              nuevoRut = nuevoRut[:-1]
+        
         duoc_exists = Alumno_duoc.objects.filter(rut_alumno_duoc=nuevoRut).exists()
         if duoc_exists == True:
             nombreAlumno = Alumno_duoc.objects.values_list('nombre_alumno_duoc',flat=True).get(rut_alumno_duoc=nuevoRut)
