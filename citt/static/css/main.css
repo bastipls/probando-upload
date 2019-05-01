@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+}
+img{
+    max-width: 100%;
+}
+.general-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 8vh;
+    min-height: 92vh;
+}

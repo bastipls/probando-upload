@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="3;url={% url 'registro' %}"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/error.css' %}">
+    <link rel="icon" href="{% static 'img/fav-icon.png' %}">
+    <title>Login</title>
+</head>
+<body>
+
+    <div class="general-container">
+        <a id="volver"  href="{% url 'registro' %}">Volver</a>
+      <div class="container-face">
+          <img class="wow hinge" data-wow-iteration="4"  data-wow-duration="3s" src="{% static 'img/sad.png' %}" alt="Imagen sad">
+      </div>
+      <p>Lo siento, el evento no existe o esta cerrado</p>
+
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script>
+            new WOW().init();
+ </script>
+</body>
+</html>
