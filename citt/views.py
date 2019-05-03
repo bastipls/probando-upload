@@ -59,8 +59,8 @@ def registro_view(request):
         
         duoc_exists = Alumno_duoc.objects.filter(rut_alumno_duoc=nuevoRut).exists()
         if duoc_exists == True:
-            nombreAlumno = Alumno_duoc.objects.values_list('nombre_alumno_duoc',flat=True).get(rut_alumno_duoc=nuevoRut)
-            carreraAlumno = Alumno_duoc.objects.values_list('carrera_alumno_duoc',flat=True).get(rut_alumno_duoc=nuevoRut)
+            nombreAlumno = Alumno_duoc.objects.values_list('nombre_alumno_duoc',flat=True).filter(rut_alumno_duoc=nuevoRut).first()
+            carreraAlumno = Alumno_duoc.objects.values_list('carrera_alumno_duoc',flat=True).filter(rut_alumno_duoc=nuevoRut).first()
         else:
             nombreAlumno = "Alumno nuevo"
             carreraAlumno = "Alumno nuevo"
