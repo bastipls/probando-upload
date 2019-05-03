@@ -31,6 +31,14 @@
         </nav>
     </div>
     <div class="general-container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="wow bounceInDown" id="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+               Alumno registrado:<strong> {{ message }} </strong>
+              </div> 
+        {% endfor %}
+        {% endif %}
         <form method="POST" id="nameForm" class="container-input">{% csrf_token %}
             <div class="event-datalist-container">
                     <label for="datalist-event">Elegir evento:</label>

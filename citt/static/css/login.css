@@ -6,6 +6,10 @@
      margin-top: 0;
      background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
     }
+#alert{
+    background-color: rgb(255, 0, 0,0.7);
+    width: 50%;
+}
 .login-form{
     display: flex;
     justify-content: center;

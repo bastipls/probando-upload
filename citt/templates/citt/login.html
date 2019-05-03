@@ -16,6 +16,14 @@
 <body>
 
     <div class="general-container">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="wow wobble" id="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   <strong> {{ message }} </strong>
+                  </div> 
+            {% endfor %}
+            {% endif %}
         <form method="POST" class="login-form"  >{% csrf_token %}
             <div class="container-icon wow bounceInDown">
                     <label class="icon-user wow swing"  data-wow-duration="1.5s"></label>
@@ -34,6 +42,7 @@
     </div>
 
     <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/alert.js' %}"></script>
     <script>
             new WOW().init();
  </script>

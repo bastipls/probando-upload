@@ -31,6 +31,14 @@
         </nav>
     </div>
     <div class="general-container">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="wow bounceInDown" id="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   Evento creado:<strong> {{ message }} </strong>
+                  </div> 
+            {% endfor %}
+            {% endif %}
         <form class="container-create" method="POST">{% csrf_token %}
                 <h2 >Crear Evento</h2>
                 <div class="item-inputs">
@@ -63,6 +71,7 @@
         </div>
     </div>
     <script src="{% static  'js/wow.js' %}"></script>
+    <script src="{% static 'js/alert.js' %}"></script>
     <script>
             new WOW().init();
  </script>

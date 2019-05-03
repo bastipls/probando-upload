@@ -7,7 +7,7 @@
 
     titleEvennt.innerHTML = datalist.value;
     txtName.focus();
-    
+    setTimeout(function() {document.getElementById('alert').style.display = "none";},3000);
     txtName.addEventListener("input",  ( e ) => {
         
             

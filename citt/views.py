@@ -9,8 +9,10 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required,user_passes_test
 from .resources import AlumnoResource
 from django.utils import timezone
+from django.contrib import messages
 
 eventoAsisteGlobal = "Seleccione evento"
+
 def login_view(request):
     context = {}
     if request.method == 'POST':
@@ -22,8 +24,8 @@ def login_view(request):
             
             return HttpResponseRedirect(reverse('registro'))
         else:
-            context['error'] = "Credenciales incorrectas"
-            
+            messages.error(request,'Credenciales incorrectas')
+
             return render(request, 'citt/login.html',context)
     else:
         return render(request,'citt/login.html',context)  
@@ -36,9 +38,8 @@ def logout_view(request):
     return redirect('login')
 @login_required(login_url='login')
 def registro_view(request):
-    global eventoAsisteGlobal
+    global eventoAsisteGlobal 
     eventos = Evento.objects.filter(estado_evento='Activo')
-    ruts = Alumno.objects.all()
     date = timezone.now
     if request.method == 'POST':
         rutAlumno = request.POST.get('txtrut',True).upper()
@@ -67,17 +68,19 @@ def registro_view(request):
         fechaAsiste = request.POST.get('txtfechaasiste',True)
         eventoThere = Evento.objects.filter(nombre_evento=eventoAsiste).filter(estado_evento='Activo').exists()
         alu = Alumno.objects.filter(rut_alumno=nuevoRut).filter(evento_asistio_alumno=eventoAsiste).filter(fecha_evento_asistio_alumno=fechaAsiste).exists()
-
+        
         if alu == False:
-            if eventoThere == True:
+            if eventoThere == True:    
                 atributos = Alumno(rut_alumno =nuevoRut,nombre_alumno=nombreAlumno,carrera_alumno=carreraAlumno,evento_asistio_alumno = eventoAsiste,fecha_evento_asistio_alumno=fechaAsiste) 
                 eventoAsisteGlobal = eventoAsiste
                 atributos.save()
+                messages.success(request,nombreAlumno)
             else:
                 eventoAsisteGlobal = 'Seleccione evento'
                 return redirect('error_evento')
         else:
             return redirect('error')
+    
     context = {'eventos':eventos,
                 'eventoAsisteGlobal':eventoAsisteGlobal,
                 'date':date}            
@@ -93,6 +96,7 @@ def crear_evento_view(request):
         eventoAsisteGlobal = nombreEvento
         atributos = Evento(nombre_evento = nombreEvento)
         atributos.save()
+        messages.success(request,nombreEvento)
     todos_eventos = Evento.objects.all()
     query = request.GET.get('q') 
     
@@ -176,7 +180,7 @@ def export_csv(request):
     dataset = alumno_resource.export()
     response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="alumnos.xls"'
-
+    
     return response
  
 
