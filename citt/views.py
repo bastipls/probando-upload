@@ -102,7 +102,7 @@ def crear_evento_view(request):
     
     if query:
         todos_eventos = todos_eventos.filter(
-                                            Q(nombre_evento__icontains=query)         
+                                            Q(nombre_evento__icontains=query)       
                                            )
     context = {'todos_eventos':todos_eventos}  
     return render(request, 'citt/evento.html',context)
@@ -121,14 +121,41 @@ def error_evento_view(request):
 @login_required(login_url='login')
 def listar_view(request):
     todos_ruts = Alumno.objects.all()
-    query = request.GET.get('q')
-    if query:
+    todos_eventos = Evento.objects.all()
+    query_rut = request.GET.get('q_rut')
+    query_evento = request.GET.get('q_evento')
+    evento = ''
+    if query_rut and query_evento:
+        todos_ruts = todos_ruts.filter(
+                                        Q(rut_alumno=query_rut ) &
+                                        Q(evento_asistio_alumno= query_evento)
+                                        )
+        asiste = todos_ruts.count()
+        evento= query_evento
+        if asiste == 0:
+            evento = ''
+            messages.error(request, "No se encontro nada :'(")
+    elif query_rut or query_evento :
         
         todos_ruts = todos_ruts.filter(
-                                        Q(rut_alumno__icontains=query ) |
-                                        Q(evento_asistio_alumno__icontains= query)
+                                        Q(rut_alumno=query_rut ) |
+                                        Q(evento_asistio_alumno= query_evento)
                                         )
-    context = {'todos_ruts':todos_ruts}
+        asiste = todos_ruts.count()
+        evento= query_evento
+        if asiste == 0:
+            evento = ''
+            messages.error(request, "No se encontro nada :'(")
+    else:
+        todos_ruts = Alumno.objects.all()
+        asiste =  todos_ruts.count()
+        evento = ''
+    
+
+    context = {'todos_ruts':todos_ruts,
+                'asiste':asiste,
+                'todos_eventos':todos_eventos,
+                'evento':evento}
     return render(request,'citt/listar.html',context)
 @user_passes_test(lambda u:u.is_superuser, login_url=('login'))
 def modificar_view(request,pk):

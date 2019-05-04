@@ -7,10 +7,16 @@
     min-height: 92vh;
     overflow-x: hidden;
 }
+#alert{
+    background-color: rgb(255, 0, 0,0.7);
+    width: 50%;
+    margin-top: -25px;
+}
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 15vh;
     width: 90%;
     margin-top: 8vh;
@@ -19,14 +25,26 @@
     -moz-box-shadow: 3px 18px 29px -22px rgba(0,0,0,0.75);
     box-shadow: 3px 18px 29px -22px rgba(0,0,0,0.75);
     position: relative;
+    
 }
-.search-container input{
+#count-student{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    max-width: 100px;
+    color: white;
+    opacity: 0.7;
+    font-size: default;
+    word-wrap: break-word;
+}
+.search-container input, select{
     padding: 8px;
     width: 30%;
+    margin: 5px;
+    border-radius: 20px;
 }
 .search-container button{
     padding: 9px;
-  
     -moz-box-shadow:inset 0px 0px 15px 3px #23395e;
 	-webkit-box-shadow:inset 0px 0px 15px 3px #23395e;
 	box-shadow:inset 0px 0px 15px 3px #23395e;
@@ -44,7 +62,9 @@
 	font-family:Arial;
 	font-size:15px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #263666;
+    text-shadow:0px 1px 0px #263666;
+    position: absolute;
+    left: 70%;
 }
 .search-container button:hover{
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #415989), color-stop(1, #2e466e));
@@ -105,8 +125,7 @@
     opacity: 0.5;
 }
 #edit-student{
-   width: 28%;
-
+    width: 28%;
     height: 90%;
     display: flex;
     justify-content: center;
@@ -197,16 +216,25 @@
         margin-top: 8vh;
     }
 
+   
 }
 @media screen and (min-width:1000px){
     .student-container{
         width: 32% ;
     }
-    .search-container input{
-        width: 20%;;
+    .search-container input, select{
+        width: 20%;
     }
     .search-container{
         height: 25vh;
         margin-top: 8vh;
     }
-}
+    .search-container button{
+        padding: 15px;
+        left: 65%;
+    }
+    #count-student{
+        max-width: 1000px;
+        font-size: 20px;
+    }
+} 

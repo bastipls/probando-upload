@@ -31,12 +31,27 @@
         </nav>
     </div>
     <div class="general-container">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="wow wobble" id="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   <strong> {{ message }} </strong>
+                  </div> 
+            {% endfor %}
+            {% endif %}
         <form method="GET" class="search-container wow fadeIn" data-wow-duration='2s'>
             {% if user.is_superuser %}
             <a id='exportar' href="{% url 'export_xls' %}">Exportar</a>
             {% endif %}
-            <input name="q"  value="{{ request.GET.q }}" type="search" class="wow fadeIn" data-wow-duration="2s"  placeholder="Buscar rut\Evento">
-            <button class="wow fadeIn" data-wow-duration="2s">Buscar</button>
+            <input name="q_rut"  value="{{ request.GET.q }}" type="search" class="wow fadeIn" data-wow-duration="2s"  placeholder="Buscar rut">
+            <p id='count-student'> Alumnos {{ evento }}: {{ asiste }}</p>
+            <select  name="q_evento" value="{{ request.GET.q }}" class="wow fadeIn" data-wow-duration="2s">
+                <option value="" selected disabled >Evento</option>
+                {% for evento in todos_eventos %}
+                <option >{{ evento.nombre_evento }} </option>
+                {% endfor %}
+            </select>
+            <button class="wow fadeIn" data-wow-duration="2s">Filtrar</button>
         </form>
         <div class="info-container">
             {% for alumno in todos_ruts %}
@@ -60,6 +75,7 @@
         </div>
     </div>
     <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/alert.js'%}"> </script>
     <script>
             new WOW().init();
  </script>
