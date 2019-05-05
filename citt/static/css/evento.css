@@ -126,12 +126,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 4vh;
     color: whitesmoke;
     -webkit-box-shadow: inset -2px -1px 27px 2px rgba(0,0,0,0.12);
     -moz-box-shadow: inset -2px -1px 27px 2px rgba(0,0,0,0.12);
     box-shadow: inset -2px -1px 27px 2px rgba(0,0,0,0.12);
     position: relative;
+    text-align: center;
 }
 #status-event{
     position: absolute;
