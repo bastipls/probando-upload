@@ -44,7 +44,7 @@
             <a id='exportar' href="{% url 'export_xls' %}">Exportar</a>
             {% endif %}
             <input name="q_rut"  value="{{ request.GET.q }}" type="search" class="wow fadeIn" data-wow-duration="2s"  placeholder="Buscar rut">
-            <p id='count-student'> Alumnos {{ evento }}: {{ asiste }}</p>
+            <p id='count-student'> Alumnos {% if evento  %}{{ evento }}{% endif %}: {{ asiste }}</p>
             <select  name="q_evento" value="{{ request.GET.q }}" class="wow fadeIn" data-wow-duration="2s">
                 <option value="" selected disabled >Evento</option>
                 {% for evento in todos_eventos %}
