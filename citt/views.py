@@ -213,10 +213,11 @@ def export_csv(request):
 
 @login_required(login_url='login')
 def descargar_manual(request):
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if request.user.is_superuser:
-        file_path=os.path.join('media','manuales','Manual_Admin.docx' )
+        file_path=os.path.join(BASE_DIR,'media','manuales','Manual_Admin.docx' )
     elif request.user.is_staff:
-        file_path=os.path.join('media','manuales', 'Manual_Ayudante.docx' )
+        file_path=os.path.join(BASE_DIR,'media','manuales','Manual_Ayudante.docx' )
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
