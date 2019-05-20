@@ -59,7 +59,7 @@ function checkRut(rut) {
     if(txtName.value.indexOf("'")!=-1 ){
         rut.setCustomValidity('');
     }else{
-        rut.setCustomValidity("Falta commilla '")
+        rut.setCustomValidity("Falta comilla '")
         return false;
     }
     // Si todo sale bien, eliminar errores (decretar que es válido)
