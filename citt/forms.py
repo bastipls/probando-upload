@@ -4,8 +4,8 @@ from .models import Alumno,Evento
 class AlumnoForm (forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['rut_alumno'].widget.attrs.update({'required':'True'})
-
+        self.fields['rut_alumno'].widget.attrs.update({'required':'True','oninput':'checkRut(this)'})
+  
 
 
     class Meta:

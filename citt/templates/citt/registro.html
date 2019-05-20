@@ -59,7 +59,7 @@
             <div class="imagen-citt">
                 <img class="wow flipInY" src="{% static 'img/CITT.png' %}" alt="Logo citt">
             </div>
-            <input name='txtrut' class="input-citt" id="txtName" maxlength="10" onkeyup="this.value=soloRut(this.value)" placeholder="00000000'0" type="text" required>
+            <input name='txtrut' oninput="checkRut(this)" class="input-citt" id="txtName" maxlength="10" onkeyup="this.value=soloRut(this.value)" placeholder="00000000'0" type="text" required>
             <button class="wow pulse" type="submit">Registrar</button>
         </form>
         <a id="manual" href="{% url 'manual' %}">Manual ayuda</a>

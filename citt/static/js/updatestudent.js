@@ -1,30 +1,15 @@
-( function( ) {
-    const txtName = document.getElementById( "txtName" );
-    const datalist = document.getElementById("datalist-event");
-    const titleEvennt = document.getElementById("event-now");
-
-    titleEvennt.innerHTML = datalist.value;
-    txtName.focus();
-    if (document.getElementById('alert')){
-        setTimeout(function() {document.getElementById('alert').style.display = "none";},3000);
-    }
-}) ( );
-
-
 function checkRut(rut) {
- 
     // Despejar Puntos
     var valor = rut.value.replace('.','');
     // Despejar Guión
-    //valor = valor.replace("-",'');
-    valor = valor.replace("'",'');
+    valor = valor.replace('-','');
     
     // Aislar Cuerpo y Dígito Verificador
     cuerpo = valor.slice(0,-1);
     dv = valor.slice(-1).toUpperCase();
     
     // Formatear RUN
-    //rut.value = cuerpo +"'"+ dv
+    rut.value = cuerpo + '-'+ dv
     
     // Si no cumple con el mínimo ej. (n.nnn.nnn)
     if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
@@ -56,16 +41,10 @@ function checkRut(rut) {
     
     // Validar que el Cuerpo coincide con su Dígito Verificador
     if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
-    if(txtName.value.indexOf("'")!=-1 ){
-        rut.setCustomValidity('');
-    }else{
-        rut.setCustomValidity("Falta commilla '")
-        return false;
-    }
+    
     // Si todo sale bien, eliminar errores (decretar que es válido)
     rut.setCustomValidity('');
 }
-
 
 function soloRut(string){//Solo ruts formato con guión
     var out = '';
@@ -80,6 +59,3 @@ function soloRut(string){//Solo ruts formato con guión
     //Retornar valor filtrado
     return out;
 } 
-
-
-
