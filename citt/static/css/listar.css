@@ -34,7 +34,7 @@
     max-width: 100px;
     color: white;
     opacity: 0.7;
-    font-size: default;
+    font-size: 13px;
     word-wrap: break-word;
 }
 .search-container input, select{

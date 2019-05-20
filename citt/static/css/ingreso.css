@@ -150,6 +150,12 @@
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#415989', endColorstr='#2e466e',GradientType=0);
 	background-color:#415989;
 }
+#manual{
+    position: absolute;
+    color: rgba(255,255,255,.7);
+    left: 30px;
+    bottom: 30px;
+}
 @media screen and (min-width:1000px){
     .container-input {
         width: 50%;

@@ -10,7 +10,8 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from .resources import AlumnoResource
 from django.utils import timezone
 from django.contrib import messages
-
+import os
+from django.http import HttpResponse, Http404
 eventoAsisteGlobal = "Seleccione evento"
 
 def login_view(request):
@@ -209,6 +210,19 @@ def export_csv(request):
     response['Content-Disposition'] = 'attachment; filename="alumnos.xls"'
     
     return response
+
+@login_required(login_url='login')
+def descargar_manual(request):
+    if request.user.is_superuser:
+        file_path=os.path.join('media','manuales','Manual_Admin.docx' )
+    elif request.user.is_staff:
+        file_path=os.path.join('media','manuales', 'Manual_Ayudante.docx' )
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
  
 
 

@@ -15,4 +15,5 @@ urlpatterns = [
     path('registro/evento/modificar/<int:pk>/',views.modificar_evento_view, name ='modificar_evento'),
     path('registro/evento/modificar/<int:pk>/eliminar',views.eliminar_evento_view, name='elimnar_evento'),
     path('export_xls/',views.export_csv, name ='export_xls'),
+    path('manual/',views.descargar_manual, name ='manual'),
 ]
