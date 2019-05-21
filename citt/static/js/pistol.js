@@ -22,7 +22,14 @@ function checkRut(rut) {
     // Aislar Cuerpo y Dígito Verificador
     cuerpo = valor.slice(0,-1);
     dv = valor.slice(-1).toUpperCase();
-    
+    var filtro = "456789";//Caracteres valido
+    //Esto lo hago para verificar si el rut es 9 millones osea 7 digitos si asi
+    //Quito todas las validaciones debido a que tengo conflicto con los carent y la pistola
+    if (filtro.indexOf(txtName.value.charAt(0)) != -1) {
+        rut.setCustomValidity('');
+      
+    }else{
+       
     // Formatear RUN
     //rut.value = cuerpo +"'"+ dv
     
@@ -55,15 +62,23 @@ function checkRut(rut) {
     dv = (dv == 0)?11:dv;
     
     // Validar que el Cuerpo coincide con su Dígito Verificador
-    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    if(dvEsperado != dv) 
+    {
+     rut.setCustomValidity("RUT Inválido");
+     return false; 
+    }
+      // Si todo sale bien, eliminar errores (decretar que es válido)
+      rut.setCustomValidity('');
+    }
+
     if(txtName.value.indexOf("'")!=-1 ){
         rut.setCustomValidity('');
     }else{
         rut.setCustomValidity("Falta comilla '")
         return false;
     }
-    // Si todo sale bien, eliminar errores (decretar que es válido)
-    rut.setCustomValidity('');
+  
+    
 }
 
 
